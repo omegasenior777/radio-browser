@@ -9,28 +9,16 @@ interface RadioListProps {
     country: string;
     favicon: string;
     language: string;
+    url: string;
 }
 
 const DEFAULT_IMAGE = 'https://via.placeholder.com/50';
 
-const RadioList = () => {
+const RadioList = ({ favorites, onFavoriteToggle }: { favorites: RadioListProps[], onFavoriteToggle: (station: RadioListProps) => void }) => {
     const [stations, setStations] = useState<RadioListProps[]>([]);
     const [error, setError] = useState<string | null>(null);
     const [searchTerm, setSearchTerm] = useState('');
     const [searchBy, setSearchBy] = useState<'name' | 'country' | 'language'>('name');
-    const [favorites, setFavorites] = useState<RadioListProps[]>([]);
-
-    useEffect(() => {
-        const savedFavorites = localStorage.getItem('favoriteRadios');
-        if (savedFavorites) {
-            try {
-                setFavorites(JSON.parse(savedFavorites) as RadioListProps[]);
-            } catch (error) {
-                console.error('Erro ao carregar favoritos:', error);
-                setFavorites([]);
-            }
-        }
-    }, []);
 
     useEffect(() => {
         async function fetchRadios() {
@@ -63,21 +51,6 @@ const RadioList = () => {
 
     const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchBy(event.target.value as 'name' | 'country' | 'language');
-    };
-
-    const toggleFavorite = (station: RadioListProps) => {
-        let updatedFavorites = [...favorites];
-
-        const isFavorite = favorites.some((fav: RadioListProps) => fav.stationuuid === station.stationuuid);
-
-        if (isFavorite) {
-            updatedFavorites = favorites.filter(fav => fav.stationuuid !== station.stationuuid);
-        } else {
-            updatedFavorites.push(station);
-        }
-
-        setFavorites(updatedFavorites);
-        localStorage.setItem('favoriteRadios', JSON.stringify(updatedFavorites));
     };
 
     if (error) return <p>{error}</p>;
@@ -137,14 +110,15 @@ const RadioList = () => {
 
                     return (
                         <button
-                            key={station.stationuuid} onClick={() => toggleFavorite(station)}
-                            className='transition delay-100 duration-200 ease-in-out hover:-translate-y-1 hover:bg-blue-900 bg-gray-800 rounded-lg flex items-center p-3 mb-2 w-full cursor-pointer'
+                            key={station.stationuuid}
+                            onClick={() => onFavoriteToggle(station)}
+                            className='flex items-center justify-between p-3 bg-gray-800 rounded-md w-full mb-2'
                         >
-                            <img src={imageUrl} alt={station.name} width={50} height={50} className="mr-3 rounded-md" />
-                            <span>{station.name}</span>
-                            {isFavorite && (
-                                <span className="ml-auto"><img src="./assets/check.png" alt="check" /></span>
-                            )}
+                            <div className="flex items-center">
+                                <img src={station.favicon || DEFAULT_IMAGE} alt={station.name} width={50} height={50} className="mr-3 rounded-md" />
+                                <span>{station.name}</span>
+                            </div>
+                            {isFavorite && <img src="./assets/check.png" alt="check" className="ml-3" />}
                         </button>
                     );
                 })}
