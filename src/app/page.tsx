@@ -55,21 +55,24 @@ export default function Home() {
     setRadioListVisible(prevState => !prevState);
   };
 
+  const radioListClasses = isRadioListVisible  ? isMobile  ? "w-full bg-slate-950 h-screen p-10"  : "w-1/3 bg-slate-950 h-screen p-10"  : "hidden";
+
+  const favoritesClasses = isRadioListVisible  ? isMobile ? "hidden" : "w-2/3 bg-slate-900 h-screen p-10" : "w-full bg-slate-900 h-screen p-10";
+
 
   return (
     <div className={`flex ${isMobile ? "flex-col" : "flex-row"}`}>
 
-      <div className={isRadioListVisible ? (isMobile ? "w-full bg-slate-950 h-screen p-10" : "hidden") : "hidden"}>
-        <button
+      <div className={radioListClasses}>
+      <button
           onClick={toggleRadioListVisibility}
-          className="cursor-pointer mb-4 text-white p-2 bg-gray-700 rounded"
+          className={isMobile ? "cursor-pointer mb-4 text-white p-2 bg-gray-700 rounded" : "hidden"}
         >
           <img src="/assets/menu.png" alt="Menu" />
         </button>
         <RadioList favorites={favorites} onFavoriteToggle={handleFavoriteToggle} />
       </div>
-
-      <div className={isRadioListVisible ? (isMobile ? "hidden" : "w-full bg-slate-900 h-screen p-10" ) : "w-full bg-slate-900 h-screen p-10"}>
+      <div className={favoritesClasses}>
         <button
           onClick={toggleRadioListVisibility}
           className="cursor-pointer mb-4 text-white p-2 bg-gray-700 rounded"
@@ -78,6 +81,7 @@ export default function Home() {
         </button>
         <FavoritesList favorites={favorites} onUpdateFavorites={setFavorites} />
       </div>
-    </div>
+
+    </div >
   );
 }
