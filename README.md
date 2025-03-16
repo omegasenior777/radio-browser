@@ -4,7 +4,7 @@
 
 Uma aplicação web para explorar e gerenciar estações de rádio online com recursos de favoritos.
 
-[Projeto](https://radio-browser-vyjj-pi1wx8eu2-cesars-projects-a58c6c33.vercel.app/)
+[Projeto](https://radio-browser-cesar.vercel.app/)
 
 ## Tecnologias Usadas
 
