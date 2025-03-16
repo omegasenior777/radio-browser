@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Radio Browser
 
-## Getting Started
+>  This is a challenge by [Coodesh](https://coodesh.com/)
 
-First, run the development server:
+Uma aplicação web para explorar e gerenciar estações de rádio online com recursos de favoritos.
+
+## Tecnologias Usadas
+
+- **Linguagens**:
+  - TypeScript
+  - JavaScript (ES6+)
+  
+- **Frameworks**:
+  - [Next.js](https://nextjs.org/) (React Framework)
+
+- **Bibliotecas**:
+  - [React](https://reactjs.org/)
+  - [Tailwind CSS](https://tailwindcss.com/)
+
+- **Outras Tecnologias**:
+  - [Node.js](https://nodejs.org/)
+  - [Docker](https://www.docker.com/)
+
+## Como Instalar e Usar o Projeto
+
+### 1. Clonar o Repositório
+
+Primeiro, clone o repositório para o seu ambiente local:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/SEU_USUARIO/radio-browser.git
+cd radio-browser
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Como executar o projeto localmente
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Método nativo
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Para executar o projeto de forma nativa, realize o clone do projeto e execute so seguintes comandos dentro da pasta:
+```
+npm install 
 
-## Learn More
+npm build
 
-To learn more about Next.js, take a look at the following resources:
+npm start
+```
+ou
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+yarn install
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+yarn build
 
-## Deploy on Vercel
+yarn start
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Docker
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Para executar o projeto com docker, realize o clone do projeto e execute os seguintes comandos dentro da pasta raíz do projeto:
+```
+docker build -t radio-browser .
+docker run -p 3000:3000 radio-browser
+```
+
+Após isso, basta abrir no navegador na porta:
+````
+localhost:3000
+````
+
+**Tenha certeza de que possua o `Docker` de seu sistema operacional instalado na máquina.**
+
+Após isso, basta abrir no navegador a `URL localhost` na porta `8080` e o retorno inicial irá aparecer.
