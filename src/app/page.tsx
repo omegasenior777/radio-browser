@@ -16,6 +16,7 @@ interface RadioListProps {
 export default function Home() {
 
   const [favorites, setFavorites] = useState<RadioListProps[]>([]);
+  const [isRadioListVisible, setRadioListVisible] = useState(true);
 
   useEffect(() => {
     const savedFavorites = localStorage.getItem('favoriteRadios');
@@ -37,14 +38,28 @@ export default function Home() {
     localStorage.setItem('favoriteRadios', JSON.stringify(updatedFavorites));
   };
 
+  const toggleRadioListVisibility = () => {
+    setRadioListVisible(prevState => !prevState);
+  };
+
   return (
     <div className="flex">
-      <div className="w-1/3 bg-slate-950 h-svw p-10">
-        <RadioList favorites={favorites} onFavoriteToggle={handleFavoriteToggle} />      </div>
-      <div className="w-2/3 bg-slate-900 h-svw p-10">
-      <FavoritesList favorites={favorites} onUpdateFavorites={setFavorites} />
+      
+      <div className={isRadioListVisible ? "w-1/3 bg-slate-950 h-svw p-10" : "hidden"}>
+               
+          <RadioList favorites={favorites} onFavoriteToggle={handleFavoriteToggle} />        
+      </div>
+      
+      <div className={isRadioListVisible ? "w-2/3 bg-slate-900 h-svw p-10" : "w-screen bg-slate-900 h-svw p-10"}>
+      <button 
+          onClick={toggleRadioListVisibility} 
+          className="cursor-pointer mb-4 text-white p-2 bg-gray-700 rounded"
+        >
+          <img src="/assets/menu.png" alt="Menu" />
+        </button> 
+        <FavoritesList favorites={favorites} onUpdateFavorites={setFavorites} />
       </div>
     </div>
-
   );
+
 }

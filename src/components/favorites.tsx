@@ -86,8 +86,8 @@ const FavoritesList = ({ favorites, onUpdateFavorites }: { favorites: RadioListP
             {playingStation && (
                 <div className="p-4 bg-gray-800 text-white rounded-md mb-5 flex items-center justify-between border-2 border-blue-900">
                     <div className="flex items-center">
-                    <button onClick={() => handlePlayStop(playingStation)} className="text-white p-1 mr-5 rounded-md">
-                        <img src="/assets/Stop.png" alt="Stop" className="w-10 h-10" />
+                    <button onClick={() => handlePlayStop(playingStation)} className="text-white p-1 mr-5 rounded-md" name='stop'>
+                        <img src="/assets/Stop.png" alt="Stop Main" className="w-10 h-10" />
                     </button>
                         <img src={playingStation.favicon || DEFAULT_IMAGE} alt={playingStation.name} width={50} height={50} className="mr-3 rounded-md" />
                         <span className="font-bold text-lg">{playingStation.name}</span>
@@ -104,7 +104,7 @@ const FavoritesList = ({ favorites, onUpdateFavorites }: { favorites: RadioListP
                         return (
                             <div key={station.stationuuid} className={`flex items-center justify-between p-3 rounded-md w-full mb-2 ${isPlaying ? 'border-2 border-blue-900' : 'bg-gray-800'}`}>
                                 <div className="flex items-center">
-                                    <button onClick={() => handlePlayStop(station)} className="text-white p-1 mr-5 rounded-md">
+                                    <button onClick={() => handlePlayStop(station)} className="text-white p-1 mr-5 rounded-md" name='stopPlay'>
                                         {isPlaying ? <img src="/assets/Stop.png" alt="Stop" className="w-10 h-10" /> : <img src="/assets/Play.png" alt="Play" className="w-10 h-10" />}
                                     </button>
                                     <audio ref={audioRef} src={station.url} />
@@ -128,12 +128,12 @@ const FavoritesList = ({ favorites, onUpdateFavorites }: { favorites: RadioListP
                                         </button>
                                     ) : (
                                         <button onClick={() => handleEdit(station)} className="text-white p-1 rounded-md">
-                                            <img src="/assets/Edit.png" alt="Edit" className="w-10 h-10" />
+                                            <img src="/assets/Edit.png" alt="Save" className="w-10 h-10" />
                                         </button>
                                     )}
 
-                                    <button onClick={() => handleDelete(station.stationuuid)} className="text-white p-1 rounded-md">
-                                        <img src="/assets/trash.png" alt="Trash" className="w-10 h-10" />
+                                    <button onClick={() => handleDelete(station.stationuuid)} className="text-white p-1 rounded-md" name='trash'>
+                                        <img src="/assets/trash.png" alt="Trash" className="w-10 h-10"/>
                                     </button>
                                 </div>
                             </div>

@@ -57,12 +57,6 @@ const RadioList = ({ favorites, onFavoriteToggle }: { favorites: RadioListProps[
 
     return (
         <>
-            <div className='flex justify-end mb-10'>
-                <button className='cursor-pointer'>
-                    <img src="/assets/menu.png" alt="Menu" />
-                </button>
-            </div>
-
             <div className='flex flex-col items-center mb-10 space-y-2'>
                 <div className="flex space-x-4">
                     <label>
@@ -71,8 +65,7 @@ const RadioList = ({ favorites, onFavoriteToggle }: { favorites: RadioListProps[
                             name="filter"
                             value="name"
                             checked={searchBy === 'name'}
-                            onChange={handleFilterChange}
-                        /> Name
+                            onChange={handleFilterChange} /> Name
                     </label>
                     <label>
                         <input className='cursor-pointer'
@@ -80,8 +73,7 @@ const RadioList = ({ favorites, onFavoriteToggle }: { favorites: RadioListProps[
                             name="filter"
                             value="country"
                             checked={searchBy === 'country'}
-                            onChange={handleFilterChange}
-                        /> Country
+                            onChange={handleFilterChange} /> Country
                     </label>
                     <label>
                         <input className='cursor-pointer'
@@ -89,8 +81,7 @@ const RadioList = ({ favorites, onFavoriteToggle }: { favorites: RadioListProps[
                             name="filter"
                             value="language"
                             checked={searchBy === 'language'}
-                            onChange={handleFilterChange}
-                        /> Language
+                            onChange={handleFilterChange} /> Language
                     </label>
                 </div>
 
@@ -99,11 +90,8 @@ const RadioList = ({ favorites, onFavoriteToggle }: { favorites: RadioListProps[
                     placeholder='Search here'
                     className='bg-gray-800 text-white rounded-md border border-neutral-300 p-2 w-64'
                     value={searchTerm}
-                    onChange={handleSearch}
-                />
-            </div>
-
-            <ul>
+                    onChange={handleSearch} />
+            </div><ul>
                 {stations.map((station) => {
                     const imageUrl = station.favicon?.trim() !== '' ? station.favicon : DEFAULT_IMAGE;
                     const isFavorite = favorites.some(fav => fav.stationuuid === station.stationuuid);
